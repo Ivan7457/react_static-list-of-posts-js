@@ -2,11 +2,10 @@ import './PostInfo.scss';
 import { UserInfo } from '../UserInfo/UserInfo';
 import { CommentList } from '../CommentList/CommentList';
 
-export const PostInfo = ({ post, users, comments }) => {
-  const user = users?.find(u => u.id === post?.userId);
+export const PostInfo = ({ post }) => {
+  const { user } = post;
 
-  const postComments =
-    comments?.filter(comment => comment.postId === post?.id) || [];
+  const comments = post.comments || [];
 
   return (
     <div className="PostInfo">
@@ -24,10 +23,10 @@ export const PostInfo = ({ post, users, comments }) => {
 
       <hr />
 
-      {postComments.length === 0 ? (
+      {comments.length === 0 ? (
         <b data-cy="NoCommentsMessage">No comments yet</b>
       ) : (
-        <CommentList comments={postComments} />
+        <CommentList comments={comments} />
       )}
     </div>
   );
